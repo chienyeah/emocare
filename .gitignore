@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.class
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Environment variables
+.env
+
+# OS / IDE junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Model checkpoints & large data (keep only what you really need)
+pretrained_models/
+wav2vec2_checkpoints/
+models/fer/CK+48/
+models/fer/data/
+models/fer/demo/
+models/fer/images/
+models/fer/plot_*/
+models/fer/preprocess_*.py
+models/fer/visualize.py
+
+# Caches
+assets/voice_cache/
+assets/transcribe_audio_cache/
+
+# Test artifacts
+*.log
+
+models/fer/

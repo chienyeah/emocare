@@ -1,0 +1,221 @@
+/* theme.css for EmoCare */
+
+/* --- Fonts & Global Variables --- */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #6db3b3; /* Soft teal */
+    --primary-hover: #5a9e9e;
+    --secondary-color: #a8d8d8; /* Lighter teal */
+    --accent-color: #5c7cfa; /* Gentle blue */
+    --bg-gradient-start: #f3f9f9;
+    --bg-gradient-end: #eef2f3;
+    --text-main: #4a4a4a;
+    --text-sub: #7f8c8d;
+    --card-bg: #ffffff;
+    --border-radius-lg: 20px;
+    --border-radius-md: 12px;
+    --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Global Body Styles --- */
+body {
+    font-family: 'Nunito', sans-serif !important;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    color: var(--text-main);
+    margin: 0;
+    min-height: 100vh;
+}
+
+gradio-app {
+    background: transparent !important;
+}
+
+/* --- Main Container --- */
+.gradio-container {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 2rem !important;
+}
+
+/* Wrap the entire app content (if possible) or target main blocks */
+.main-block {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 2rem;
+    margin-top: 1rem;
+}
+
+/* --- Header --- */
+#header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#header h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 0.2rem;
+    letter-spacing: -0.5px;
+}
+
+#header .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+    font-weight: 400;
+}
+
+/* --- Chatbot --- */
+.chatbot {
+    height: 500px !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    border-radius: var(--border-radius-lg) !important;
+    background-color: var(--card-bg) !important;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+    overflow: hidden;
+}
+
+/* User message bubble */
+.chatbot .user-message {
+    background-color: #e3f2fd !important; /* Light blue */
+    border-radius: 18px 18px 0 18px !important;
+    color: #1565c0 !important;
+    border: none !important;
+    padding: 12px 16px !important;
+    margin-bottom: 8px;
+}
+
+/* Bot message bubble */
+.chatbot .bot-message {
+    background-color: #f1f8e9 !important; /* Light minty green */
+    border-radius: 18px 18px 18px 0 !important;
+    color: #33691e !important;
+    border: none !important;
+    padding: 12px 16px !important;
+    margin-bottom: 8px;
+}
+
+/* --- Inputs & Buttons --- */
+.input-box textarea {
+    border-radius: var(--border-radius-md) !important;
+    border: 1px solid #e0e0e0 !important;
+    font-size: 1rem !important;
+    padding: 12px !important;
+    background-color: white !important;
+    transition: all 0.2s ease;
+}
+
+.input-box textarea:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 2px rgba(109, 179, 179, 0.2) !important;
+}
+
+button.primary-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border-radius: 25px !important;
+    padding: 10px 24px !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+button.primary-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(109, 179, 179, 0.3) !important;
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color)) !important;
+}
+
+/* Audio & Image Inputs */
+.gradio-audio, .gradio-image {
+    border-radius: var(--border-radius-md) !important;
+    border: 1px solid #f0f0f0 !important;
+    background-color: white !important;
+    overflow: hidden;
+}
+
+/* --- Right Column Card (Avatar + Info) --- */
+.avatar-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.avatar-img {
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 50% !important;
+    object-fit: cover;
+    border: 6px solid #f0f8ff;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Emotion Label Pill */
+.emotion-label .label-wrap {
+    background-color: #e1f5fe !important;
+    color: #0277bd !important;
+    padding: 6px 16px !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+    border: none !important;
+    text-transform: capitalize;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Scores Debug Box */
+.json-box {
+    font-size: 0.85rem !important;
+    background-color: #fafafa !important;
+    border-radius: var(--border-radius-md) !important;
+    border: 1px solid #eee !important;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Disclaimer */
+.disclaimer {
+    font-size: 0.85rem;
+    color: #999;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-style: italic;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .gradio-container {
+        padding: 1rem !important;
+    }
+    
+    #header h1 {
+        font-size: 2rem;
+    }
+    
+    .chatbot {
+        height: 400px !important;
+    }
+    
+    /* Ensure columns stack nicely */
+    .row {
+        flex-direction: column !important;
+    }
+    
+    .avatar-card {
+        margin-top: 2rem;
+    }
+}
+
