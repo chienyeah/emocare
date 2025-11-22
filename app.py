@@ -359,4 +359,8 @@ with gr.Blocks(css=theme_css, title="EmoCare") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch()
+    # Try a different port range to avoid WinError 10013 (often Hyper-V reserved ports)
+    try:
+        demo.launch(server_port=9001)
+    except OSError:
+        demo.launch(server_port=9002)

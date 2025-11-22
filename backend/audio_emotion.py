@@ -150,4 +150,4 @@ def analyze_audio(wav_path: str) -> dict:
     }
 
 if __name__ == "__main__":
-    print("Audio emotion module loaded.")
+    print(analyze_audio("test_audio.wav"))

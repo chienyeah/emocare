@@ -11,11 +11,12 @@ ENV/
 # Environment variables
 .env
 
-# OS / IDE junk
+# OS / IDE / tool junk
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+.cursor/
 
 # Python packaging
 build/
@@ -25,13 +26,13 @@ dist/
 # Model checkpoints & large data (keep only what you really need)
 pretrained_models/
 wav2vec2_checkpoints/
-models/fer/CK+48/
-models/fer/data/
-models/fer/demo/
-models/fer/images/
-models/fer/plot_*/
-models/fer/preprocess_*.py
-models/fer/visualize.py
+models/fer/
+
+# LoRA training artifacts (keep config/README, ignore heavy weights & checkpoints)
+models/lora/checkpoint-*/
+models/lora/*.pt
+models/lora/*.bin
+models/lora/*.safetensors
 
 # Caches
 assets/voice_cache/
@@ -39,5 +40,3 @@ assets/transcribe_audio_cache/
 
 # Test artifacts
 *.log
-
-models/fer/

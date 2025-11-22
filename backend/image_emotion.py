@@ -147,4 +147,5 @@ def analyze_image(image: Image.Image) -> dict:
         return {"label": "error", "score": 0.0}
 
 if __name__ == "__main__":
-    print("Image emotion module loaded.")
+    img = Image.open("test_image.jpg")
+    print(analyze_image(img))

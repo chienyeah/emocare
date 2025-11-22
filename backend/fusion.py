@@ -29,9 +29,9 @@ EMOTION_MAPPING = {
 
 # Reliability-based weights
 WEIGHTS = {
-    "text": 0.70,   # High reliability
+    "text": 0.65,   # High reliability
     "image": 0.15,  # Low reliability
-    "audio": 0.15   # Low reliability (often overconfident neutral)
+    "audio": 0.20   # Low reliability (often overconfident neutral)
 }
 
 AUDIO_SCORE_CAP = 0.9
@@ -97,11 +97,19 @@ def fuse_emotions(results: dict) -> dict:
     if not scores:
         return {"label": "neutral", "scores": {}}
 
-    fused_label, _ = scores.most_common(1)[0]
+    fused_label, fused_score = scores.most_common(1)[0]
+    fused_scores = dict(scores)
+    
+    # Confidence threshold: default to neutral if the best weighted score is weak
+    if fused_score < 0.5:
+        return {
+            "label": "neutral",
+            "scores": fused_scores | {"rule": "low_confidence_neutral"}
+        }
     
     return {
         "label": fused_label,
-        "scores": dict(scores)
+        "scores": fused_scores
     }
 
 if __name__ == "__main__":

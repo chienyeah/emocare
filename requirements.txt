@@ -4,6 +4,8 @@ torchvision
 transformers
 accelerate
 bitsandbytes
+peft
+trl
 sentencepiece
 huggingface_hub
 datasets

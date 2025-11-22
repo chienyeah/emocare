@@ -26,6 +26,9 @@ bnb_config = BitsAndBytesConfig(
     bnb_4bit_quant_type="nf4",
 )
 
+# Path where the LoRA adapter is saved
+LORA_ADAPTER_PATH = "models/lora"
+
 _tokenizer = None
 _model = None
 
@@ -36,29 +39,36 @@ def load_model():
 
     print(f"Loading comfort LLM: {MODEL_NAME}...")
     try:
+        # Load Tokenizer
         _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, token=HF_TOKEN)
         
-        # If on CPU, 4-bit loading might fail or be very slow. 
-        # bitsandbytes is primarily for CUDA.
+        # 1. Load Base Model
         if torch.cuda.is_available():
-            _model = AutoModelForCausalLM.from_pretrained(
+            model_base = AutoModelForCausalLM.from_pretrained(
                 MODEL_NAME,
                 quantization_config=bnb_config,
                 device_map="auto",
                 token=HF_TOKEN
             )
         else:
-            print("Warning: CUDA not available. Loading model in full precision (slow/heavy) or skipping.")
-            # Fallback for CPU users (might OOM easily with 8B model)
-            # Using float32 or smaller model would be better here.
-            # For safety, let's try to load without quantization if CPU, but warn.
-            _model = AutoModelForCausalLM.from_pretrained(
+            print("Warning: CUDA not available. Loading model in full precision (slow/heavy).")
+            model_base = AutoModelForCausalLM.from_pretrained(
                 MODEL_NAME,
                 device_map="cpu",
                 token=HF_TOKEN,
                 torch_dtype=torch.float32
             )
-            
+
+        # 2. Check for and Load LoRA Adapter
+        if os.path.exists(LORA_ADAPTER_PATH) and os.path.exists(os.path.join(LORA_ADAPTER_PATH, "adapter_model.safetensors")):
+            print(f"Found LoRA adapter at {LORA_ADAPTER_PATH}. Loading...")
+            from peft import PeftModel
+            _model = PeftModel.from_pretrained(model_base, LORA_ADAPTER_PATH)
+            print("LoRA adapter loaded successfully.")
+        else:
+            print("No LoRA adapter found. Using base model only.")
+            _model = model_base
+
         _model.eval()
         print("Comfort LLM loaded.")
     except Exception as e:
@@ -149,7 +159,7 @@ def generate_comfort(user_text: str, emotion: str, history: list = None) -> str:
 
 if __name__ == "__main__":
     # Simple test (only if model is loadable/downloaded)
-    pass
+    print(generate_comfort("I'm so happy I reached my goal gpa this sem!!!", "happy"))
 
 # Auto-load model on module import if not in __main__ guard context (e.g. when imported by app)
 # This ensures the model starts loading immediately when the server starts
