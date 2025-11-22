@@ -8,7 +8,7 @@ EmoCare is a multimodal emotion comfort companion designed to provide empathetic
 
 ## Additional Features & Implementation
 
-We have implemented a comprehensive multimodal system that goes beyond simple text analysis. The key features include:
+I have implemented a comprehensive multimodal system that goes beyond simple text analysis. The key features include:
 
 ### 1. Multimodal Emotion Recognition
 The system fuses data from three modalities to determine the user's emotional state:
@@ -18,9 +18,9 @@ The system fuses data from three modalities to determine the user's emotional st
 *   **Fusion Logic:** A weighted fusion algorithm combines confidence scores from all active modalities to determine the dominant emotion.
 
 ### 2. Empathetic Comfort Agent (LLM with LoRA)
-Instead of generic responses, we generate empathetic, non-clinical support using a Large Language Model:
+Instead of generic responses, I generate empathetic, non-clinical support using a Large Language Model:
 *   **Base Model:** **Llama 3.1 8B Instruct**, loaded with 4-bit quantization (NF4) via `bitsandbytes` for efficient inference on consumer GPUs.
-*   **Fine-tuning:** We integrated a **LoRA (Low-Rank Adaptation)** adapter (trained on comfort-specific datasets) using the `peft` library to steer the model towards warm, concise, and supportive responses.
+*   **Fine-tuning:** I integrated a **LoRA (Low-Rank Adaptation)** adapter (trained on comfort-specific datasets) using the `peft` library to steer the model towards warm, concise, and supportive responses.
 
 ### 3. Expressive Voice Interaction
 *   **Speech-to-Text (STT):** Integrated **Azure Cognitive Services Speech SDK** for accurate, real-time transcription of user speech.
