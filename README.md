@@ -88,45 +88,36 @@ I have integrated and fine-tuned multiple specialized AI models to handle differ
 Follow these steps to set up the project environment:
 
 1.  **Clone or Extract the Project:**
-    Ensure the project files are in a local directory (e.g., `D:\projects\emocare`).
+    Ensure the project files are in a local directory (e.g., `.\emocare`).
 
-2.  **Create a Virtual Environment (Optional but Recommended):**
-    python -m venv .venv
-    .venv\Scripts\activate
-    3.  **Install Dependencies:**
-    Install all required Python libraries using `pip`:
-    pip install -r requirements.txt
+2.  **Configuration Requirements:**
+    *   **Environment Variables:**
+        *   Create a `.env` file in the root directory if needed (or edit `backend/config.py`).
+        *   **Hugging Face Token:** Ensure you have a token with access to Llama 3.1 and set it as `HF_TOKEN`.
+        *   **Azure Speech:** Set `AZURE_SPEECH_KEY` and `AZURE_SPEECH_REGION` in `backend/config.py` to enable the Speech-to-Text feature.
+    *   **Model Downloads:** The system will automatically download required models from Hugging Face on the first run. Ensure you have a stable internet connection.
+
+3.  **Create a Virtual Environment (Optional but Recommended):**
+    `python -m venv .venv`
+    `.venv\Scripts\activate`
+
+4.  **Install Dependencies:**
+    Install all required Python libraries:
+    `pip install -r requirements.txt`
         *Note: If you encounter issues with `torch`, ensure you install the CUDA-enabled version compatible with your GPU from [pytorch.org](https://pytorch.org/).*
-
-4.  **Environment Variables:**
-    *   Create a `.env` file in the root directory if needed (or edit `backend/config.py`).
-    *   **Hugging Face Token:** Ensure you have a token with access to Llama 3.1 and set it as `HF_TOKEN`.
-    *   **Azure Speech:** Set `AZURE_SPEECH_KEY` and `AZURE_SPEECH_REGION` in `backend/config.py` to enable the Speech-to-Text feature.
 
 ---
 
 ## How to Run
 
-### Command-Line Instructions
-
-1.  Open your terminal or command prompt.
-2.  Navigate to the project root directory.
-3.  Run the main application script:
-    python app.py
-    ### Configuration Requirements
-
-*   The system will automatically download required models from Hugging Face on the first run. Ensure you have a stable internet connection.
-*   The console will display logs indicating the loading status of:
-    *   SpeechBrain Audio Model
-    *   DistilRoBERTa Text Model
-    *   Llama 3.1 Comfort Model (this may take a minute)
+    `python app.py`
 
 ### Expected Outputs
 
-1.  **Console Output:** You should see a success message like:
-    Running on local URL:  http://127.0.0.1:9001
-    2.  **Web Interface:**
-    *   Open your web browser and go to `http://127.0.0.1:9001`.
+1.  **Console Output:** You should see logs indicating the loading of models (SpeechBrain, DistilRoBERTa, Llama 3.1) and a success message:
+    Running on local URL:  `http://localhost:9001`
+2.  **Web Interface:**
+    *   Open your web browser and go to `http://localhost:9001`.
     *   You will see the EmoCare interface with the Chatbot, Avatar, and Input controls.
 3.  **Interaction:**
     *   **Type:** "I'm feeling really stressed about my exams." -> The Avatar should look concerned, and the text reply will be supportive.
